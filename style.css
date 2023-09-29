@@ -4,7 +4,7 @@
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 body {
-    background-image: linear-gradient(to right, rgb(255, 65, 246),rgb(0, 191, 255));
+    background-image: linear-gradient(to right, rgb(179, 65, 255),rgb(0, 199, 33));
     align-items: center;
 
 }
@@ -22,15 +22,25 @@ main{
 section {
     margin: 100px;
     display: flex;
-    flex-direction: column;
     display: block;
     text-align: center;
     line-height: 300%;
     border: 2px solid black;
-    width: 500px;
+    border-radius: 15px;
+    width: 550px;
+    background-image: linear-gradient(to left, rgb(179, 65, 255),rgb(0, 199, 33));
 }
 
 button {
+    font-size: 30px;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+#quizStarter {
     font-size: 30px;
     margin: 10px;
     padding: 10px;
@@ -39,3 +49,32 @@ button {
     height: 200px;
   
 }
+
+#questionBox{
+
+}
+
+.time {
+
+}
+
+#answerBox {
+
+}
+
+#answerBox1 {
+    
+}
+
+#answerBox2 {
+    
+}
+
+#answerBox3 {
+    
+}
+
+.answer {
+
+}
+
