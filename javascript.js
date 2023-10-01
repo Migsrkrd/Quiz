@@ -1,48 +1,9 @@
-//var declaration/document linking
-    //var time remaining
-    //
-
-//make array of objects (object = question: "", answer: "", wrong answers:"")
-
-//set up function for START QUIZ button
-
-//button.eventListener("click", gamestart) ?
-
-//listen for button start
-
-//first question and answer should be display now, as well as timer is set
-
-//add eventListeners to answer options and check for true or false
-    //use if right, move onto function that goes to next question
-    //use if wrong, move onto function that goes to next question as well as decrement time
-
-//write a function for wrong and decrement timer by 10 seconds
-
-//use event listeners and once an answer is chosen, go to next question regardless 
-//(set this process by setting an interval of the object array containing questions answers and wrong answers)
-//kinda like the carrousel box example
-
-//make a total of 6 questions
-    //if last question or timer end, finish quiz and bring up last page
-    
-
-//repeat unntil timer hits 0 or all questions are all done
-    //when our array of objects returns as undefined or length-1 for index
-
-//endgame
-    //stop timer and keep stopped time displayed
-    //disaply the score at the end, which is the amount of time left on the timer
-    //prompt for initials
-    //save score and initials as (initials: score)
-
-//--------------------------------------------------------------------------------------------------------------------------------
-
     var headerTag = document.querySelector("header");
     var quizStartButton = document.querySelector("#quizStarter");
     var questionBox = document.getElementById("questionBox");
     var answerBox = document.getElementById("answerBox");
     var timeElement = document.querySelector(".time");
-    var secondsLeft = 180;
+    var secondsLeft = 120;
     var answerBox1 = document.getElementById("answerBox1");
     var answerBox2 = document.getElementById("answerBox2");
     var answerBox3 = document.getElementById("answerBox3");
@@ -50,9 +11,19 @@
     var answer1 = document.querySelector(".answer1");
     var answer2 = document.querySelector(".answer2");
     var answer3 = document.querySelector(".answer3");
-    var buttonsArray = [answerBox, answerBox1, answerBox2, answerBox3];
-  
+    var messageTop = "";
+    var yourScore = document.getElementById("yourScore");
+    var initials = document.getElementById("initials");
+    var initialsBox = document.getElementById("initialsBox");
+    var endGameInfo = document.querySelector(".endGameInfo");
+    var submitInitials = document.getElementById("submitInitials");
+    var scoreTabel = document.getElementById("scoreTable");
+    var scoreTableTitle = document.getElementById("scoreTableTitle");
+    var scoresList = document.querySelector(".scoresList");
 
+
+    initialsBox.setAttribute("style", "display:none");
+    initials.setAttribute("style", "display:none");
 
     function setTime(){
        var timerInterval = setInterval(function(){
@@ -60,16 +31,15 @@
             timeElement.textContent = secondsLeft;
             if(secondsLeft <= 0) {
                 clearInterval(timerInterval);
-                //place it here!!!!!
-            }
-        }, 1000);
-            if(endGame()===true){
+                endGame();
+        }
+            else if(questionBox.textContent === "Quiz over, how did you do?") {
                 clearInterval(timerInterval);
             }
+        }, 1000);
     }
 
 // add function for what happens if timer runs out here and place above
-
 
     quizStartButton.addEventListener("click", function(){
         setTime();
@@ -99,6 +69,7 @@
         answer3.textContent = "yellow";
     });
 
+
     function question2(){
         questionBox.textContent = "How old is Michael?(Hint: he was born in 2000)";
         answerBox.addEventListener("click", function(){
@@ -118,6 +89,7 @@
         answer2.textContent = "25";
         answer3.textContent = "26";
     }
+
     
     function question3(){
         questionBox.textContent = "Does Michael ever lie?";
@@ -212,12 +184,46 @@
         answer2.textContent = "Lie? does Michael ever lie?";
         answer3.textContent = "yep, now you get an F";
     }
+    
 
     function endGame (){
-        document.body.children[0].children[0].textContent = secondsLeft;
+        document.body.children[0].textContent = "Quiz Finished";
+        document.body.children[0].setAttribute("style","font-size: 300%; font-weight: bold")
+        questionBox.textContent = "Quiz over, how did you do?";
+        answer.setAttribute("style","display: none");
+        answer1.setAttribute("style","display: none");
+        answer2.setAttribute("style","display: none");
+        answer3.setAttribute("style","display: none");
+        answerBox.setAttribute("style", "display: none");
+        answerBox1.setAttribute("style", "display: none");
+        answerBox2.setAttribute("style", "display: none");
+        answerBox3.setAttribute("style", "display: none");
+        endGameInfo.setAttribute("style", "border: 2px solid black; background-image: linear-gradient(to left, rgb(179, 65, 255),rgb(0, 199, 33)); padding: 20px; font-size: 200%; line-height: 150%; display: flex; flex-direction: column; text-align: center; width: 40%; margin:5%; align-items: center");
+        yourScore.textContent = "your score: " +secondsLeft + " seconds.";
+        initials.setAttribute("style", "display: block");
+        initialsBox.setAttribute("style", "display: block; line-height: 150%; font-size: 100%; width: 20%; text-align: center");
+        submitInitials.innerHTML = "<button>submit</button>"
+        submitInitials.setAttribute("style", "border-radius: 15px")
+        scoreTabel.setAttribute("style", "display:block; border:2px solid black; margin: 5%; padding: 20px; width: 40%; height: 100%; background-image: linear-gradient(to left, rgb(179, 65, 255),rgb(0, 199, 33))")
+        scoreTableTitle.textContent = "Last Score";
+        scoreTableTitle.setAttribute("style", "text-decoration: underline; font-size: 200%;text-align: center")
+        displayScore();
+    
+    }  
+    
+        submitInitials.addEventListener("click", function(event){
+            var newScore = {
+                initials: initialsBox.value,
+                score: secondsLeft,
+            };
+            localStorage.setItem("newScoreStringify", JSON.stringify(newScore));
+            displayScore();
+            event.preventDefault();
+    });
+
+        function displayScore(){
+            var previousScore = JSON.parse(localStorage.getItem("newScoreStringify"));
+            document.body.children[2].children[1].children[1].innerHTML = previousScore.initials + "-" +previousScore.score
+            document.body.children[2].children[1].children[1].setAttribute("style", "font-size: 200%")
     }
 
-
-
-    
-    

@@ -50,6 +50,15 @@ button {
   
 }
 
+aside button {
+    border-radius: 15px;
+    width: 130px;
+}
+
+aside {
+    display: flex;
+}
+
 #questionBox{
 
 }
@@ -78,3 +87,29 @@ button {
 
 }
 
+#yourScore {
+
+}
+
+#initials {
+
+}
+
+#initialsBox {
+
+}
+
+.endGameInfo {
+}
+
+#submitInitials {
+
+}
+
+#scoreTable{
+
+}
+
+#scoreTableTitle{
+
+}
