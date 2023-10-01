@@ -39,8 +39,6 @@
         }, 1000);
     }
 
-// add function for what happens if timer runs out here and place above
-
     quizStartButton.addEventListener("click", function(){
         setTime();
         document.body.children[0].children[0].textContent = secondsLeft;
